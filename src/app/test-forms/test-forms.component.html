@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-md">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <div>
+                    <label>Name: </label>
+                    <input type="text" formControlName="name">
+                    <small *ngIf="userForm.controls['name'].errors">Name required</small>
+                </div>
+                <div>
+                    <label>Email: </label>
+                    <input type="text" formControlName="email">
+                </div>
+                
+                <div>
+                    <label>Gender: </label>
+                    <label>
+                        <input type="radio" formControlName="gender" value="male">Male
+                    </label>
+                   
+                    <label>
+                        <input type="radio" formControlName="gender" value="female">Female
+                    </label>
+                </div>
+                <div>
+                    <label>Phone Number: </label>
+                        <input type="number" formControlName="phoneNumber">
+                </div>
+
+                <h3>Addresses:</h3>
+                <div formArrayName="addresses">
+                    <div *ngFor="let address of address.controls; let i = index;" [formGroupName]="i">
+                    <label>Street:</label>
+                    <input formControlName="street">
+                    <label>City:</label>
+                    <input formControlName="city">
+                    <label>ZIP Code:</label>
+                    <input formControlName="zip">
+
+                    <button type="button" (click)="removeAddress(i)">Remove</button>
+                    </div>
+                </div>
+                <button type="button" (click)="addAddress()">Add Address</button>
+                <button type="submit" [disabled]="userForm.invalid">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
