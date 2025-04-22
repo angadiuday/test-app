@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { User } from '../interface/user.model';
 
 @Component({
   selector: 'app-test-forms',
@@ -19,20 +20,21 @@ export class TestFormsComponent implements OnInit{
       email: new FormControl('', [Validators.required, Validators.email]),
       gender:new FormControl('', Validators.required),
       phoneNumber: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(15), Validators.pattern('^[6-9][0-9]{9}$')]),
-      address: this.fb.array([])
+      address: this.fb.array([]),
+      // qualifications: this.fb.array([])
     })
 
-    this.userForm.patchValue({
-      "name": "uday",
-      "email": "uday@sds.com",
-      "gender": "male",
-      "phoneNumber": 9877772222
-  })
+  //   this.userForm.patchValue({
+  //     "name": "uday",
+  //     "email": "dsd@asa.com",
+  //     "gender": "male",
+  //     "phoneNumber": 9877772222
+  // })
   this.addAddress();
   }
 
   get address(): FormArray{
-    return this.userForm.get('address') as FormArray
+    return this.userForm.get('address') as FormArray<FormGroup>
   }
 
   ngOnInit(): void {
@@ -41,9 +43,10 @@ export class TestFormsComponent implements OnInit{
 
   newAddress(): FormGroup{
     return this.fb.group({
-      street: new FormControl(''),
+      line1: new FormControl(''),
+      line2: new FormControl(''),
       city: new FormControl(''),
-      zip: new FormControl('')
+      country: new FormControl('')
     })
   }
 
@@ -58,7 +61,8 @@ export class TestFormsComponent implements OnInit{
 
   onSubmit() {
     if(this.userForm.valid){
-      console.log('Form submitted', this.userForm.value);
+      const user: User = this.userForm.value;
+      console.log('Form submitted', user);
     }
   }
 

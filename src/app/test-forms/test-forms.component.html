@@ -30,17 +30,19 @@
                 <h3>Addresses:</h3>
                 <div formArrayName="addresses">
                     <div *ngFor="let address of address.controls; let i = index;" [formGroupName]="i">
-                    <label>Street:</label>
-                    <input formControlName="street">
+                    <label>line 1:</label>
+                    <input type="text" formControlName="line1">
+                    <label>line 2:</label>
+                    <input type="text" formControlName="line 2">
                     <label>City:</label>
-                    <input formControlName="city">
-                    <label>ZIP Code:</label>
-                    <input formControlName="zip">
-
+                    <input type="text" formControlName="city">
+                    <label>Country:</label>
+                    <input type="text" formControlName="country">
                     <button type="button" (click)="removeAddress(i)">Remove</button>
                     </div>
+                    <button type="button" (click)="addAddress()">Add Address</button>
                 </div>
-                <button type="button" (click)="addAddress()">Add Address</button>
+                
                 <button type="submit" [disabled]="userForm.invalid">Submit</button>
             </form>
         </div>
