@@ -21,7 +21,7 @@ export class TestFormsComponent implements OnInit{
       gender:new FormControl('', Validators.required),
       phoneNumber: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(15), Validators.pattern('^[6-9][0-9]{9}$')]),
       addresses: this.fb.array([]),
-      // qualifications: this.fb.array([])
+      qualifications: this.fb.array([])
     })
 
   //   this.userForm.patchValue({
@@ -30,9 +30,15 @@ export class TestFormsComponent implements OnInit{
   //     "gender": "male",
   //     "phoneNumber": 9877772222
   // })
+  
   this.addAddress();
+  this.addQualifications()
   }
 
+
+  get qualifications(): FormArray{
+    return this.userForm.get('qualifications') as FormArray;
+  }
   get addresses(): FormArray{
     return this.userForm.get('addresses') as FormArray<FormGroup>
   }
@@ -50,13 +56,28 @@ export class TestFormsComponent implements OnInit{
     })
   }
 
+  newQualifications():FormGroup{
+    return this.fb.group({
+      collegeName: new FormControl(''),
+      degree: new FormControl('')
+    })
+  }
+
   addAddress() {
     this.addresses.push(this.newAddress());
+  }
+
+  addQualifications(){
+    this.qualifications.push(this.newQualifications());
   }
 
   removeAddress(index:number) {
     this.addresses.removeAt(index);
 
+  }
+
+  removeQualifications(index:number) {
+    this.qualifications.removeAt(index);
   }
 
   onSubmit() {
