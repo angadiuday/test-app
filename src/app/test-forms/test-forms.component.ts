@@ -20,7 +20,7 @@ export class TestFormsComponent implements OnInit{
       email: new FormControl('', [Validators.required, Validators.email]),
       gender:new FormControl('', Validators.required),
       phoneNumber: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(15), Validators.pattern('^[6-9][0-9]{9}$')]),
-      address: this.fb.array([]),
+      addresses: this.fb.array([]),
       // qualifications: this.fb.array([])
     })
 
@@ -33,8 +33,8 @@ export class TestFormsComponent implements OnInit{
   this.addAddress();
   }
 
-  get address(): FormArray{
-    return this.userForm.get('address') as FormArray<FormGroup>
+  get addresses(): FormArray{
+    return this.userForm.get('addresses') as FormArray<FormGroup>
   }
 
   ngOnInit(): void {
@@ -51,11 +51,11 @@ export class TestFormsComponent implements OnInit{
   }
 
   addAddress() {
-    this.address.push(this.newAddress());
+    this.addresses.push(this.newAddress());
   }
 
   removeAddress(index:number) {
-    this.address.removeAt(index);
+    this.addresses.removeAt(index);
 
   }
 

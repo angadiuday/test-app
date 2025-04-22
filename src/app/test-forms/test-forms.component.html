@@ -29,11 +29,11 @@
 
                 <h3>Addresses:</h3>
                 <div formArrayName="addresses">
-                    <div *ngFor="let address of address.controls; let i = index;" [formGroupName]="i">
+                    <div *ngFor="let address of addresses.controls; let i = index;" [formGroupName]="i">
                     <label>line 1:</label>
                     <input type="text" formControlName="line1">
                     <label>line 2:</label>
-                    <input type="text" formControlName="line 2">
+                    <input type="text" formControlName="line2">
                     <label>City:</label>
                     <input type="text" formControlName="city">
                     <label>Country:</label>
